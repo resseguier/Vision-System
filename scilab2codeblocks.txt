@@ -1,0 +1,82 @@
+---------------------------------------------
+|                                           |
+|                                           |
+|   Ajout Librairies SCILAB à CODE:BLOCKS   |
+|                                           |
+|                                           |
+---------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+Il faut que code:blocks comme scilab soit tout deux soit en 32 bits soit en 64 bits pas les deux en même temps !
+
+A Windows directement :
+-ajouter à la variable d'environnement "Path" : "C:\Program Files (x86)\scilab-5.5.1\bin"
+
+Dans code:blocks :
+-> Settings/compiler...
+ |-> Linker settings
+ | |-> Ajouter les fichiers suivant dans le cadre "Linker libraries"
+ | | |-> C:\Program Files (x86)\scilab-5.5.1\bin\api_scilab.lib
+ | | |-> C:\Program Files (x86)\scilab-5.5.1\bin\call_scilab.lib
+ |   
+ |-> Search directories
+ | |-> Ajouter les dossiers suivant dans "Compiler"
+ | | |-> C:\Program Files (x86)\scilab-5.5.1\modules\core
+ | | |-> C:\Program Files (x86)\scilab-5.5.1\modules\api_scilab
+ | | |-> C:\Program Files (x86)\scilab-5.5.1\modules\call_scilab
+/*
+ | | 
+ | |-> Ajouter le dossier suivant dans "Linker"
+ | | |-> C:\Program Files (x86)\scilab-5.5.1\bin
+*/
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+Exemple de programme à tester pour vérification ( fichier "main.c" ) :
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "api_scilab.h"
+#include "stack-c.h" /* Provide functions to access to the memory of Scilab */
+#include "call_scilab.h" /* Provide functions to call Scilab engine */
+
+int main( int argc, char** argv ) {
+    /****** INITIALIZATION **********/
+    #ifdef _MSC_VER
+    if( StartScilab(NULL,NULL,NULL) == FALSE )
+    #else
+    if( StartScilab(getenv("SCI"),NULL,NULL) == FALSE )
+    #endif
+    {
+        fprintf(stderr,"Error while calling StartScilab\n") ;
+        return -1 ;
+    }
+
+    /****** ACTUAL Scilab TASKS *******/
+
+    SendScilabJob("myMatrix=['sample','for the help']") ;
+    SendScilabJob("disp(myMatrix);") ; // Will display !sample  for the help  !
+    SendScilabJob("disp([2,3]+[-44,39]);") ; // Will display   - 42.    42.
+
+    /****** TERMINATION **********/
+    if( TerminateScilab(NULL) == FALSE ) {
+        fprintf(stderr,"Error while calling TerminateScilab\n") ;
+        return -2 ;
+    }
+    return 1 ;
+}
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+Liens d'aide originaux :
+
+http://weihuang.blogs.rice.edu/tips-on-computing-tools/the-method-to-use-scilab-function-in-c-code/
+http://alexandre-laurent.developpez.com/tutoriels/c-cpp/installation-et-configuration-d-une-bibliotheque/
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------

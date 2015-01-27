@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Vision_System" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Vision_System" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters='0 &quot;cam_g.png&quot; &quot;cam_d.png&quot;' />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Vision_System" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="include" />
+		</Compiler>
+		<Linker>
+			<Add library="mingw32" />
+			<Add library="SDLmain" />
+			<Add library="SDL" />
+			<Add library="lib\SDL_image.lib" />
+			<Add library="lib\SDL_TTF.lib" />
+			<Add directory="lib" />
+		</Linker>
+		<Unit filename="include/ESCAPI/escapi.h" />
+		<Unit filename="include/LODEPNG/LODEPNG.h" />
+		<Unit filename="include/SURF/fasthessian.cpp" />
+		<Unit filename="include/SURF/fasthessian.h" />
+		<Unit filename="include/SURF/integral.cpp" />
+		<Unit filename="include/SURF/integral.h" />
+		<Unit filename="include/SURF/ipoint.cpp" />
+		<Unit filename="include/SURF/ipoint.h" />
+		<Unit filename="include/SURF/kmeans.h" />
+		<Unit filename="include/SURF/responselayer.h" />
+		<Unit filename="include/SURF/surf.cpp" />
+		<Unit filename="include/SURF/surf.h" />
+		<Unit filename="include/SURF/surflib.h" />
+		<Unit filename="include/SURF/utils.cpp" />
+		<Unit filename="include/SURF/utils.h" />
+		<Unit filename="include/VISION/VISION.h" />
+		<Unit filename="sources/escapi.cpp" />
+		<Unit filename="sources/lodepng.cpp" />
+		<Unit filename="sources/main.cpp" />
+		<Unit filename="sources/vision.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
